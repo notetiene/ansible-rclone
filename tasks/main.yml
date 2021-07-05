@@ -56,6 +56,10 @@
     - rclone_version | length == 0 or rclone_version == "0.0.0"
     - rclone_release == 'beta'
 
+- name: SECOND return information from the previous tasks
+  ansible.builtin.debug:
+    var: rclone_version
+
 - name: Install the binary
   include_tasks: install-bin.yml
   when: (((not ansible_local.rclone.installed|d())|bool) or (ansible_local.rclone.installed_version|d("0.0.0")) != rclone_version)
